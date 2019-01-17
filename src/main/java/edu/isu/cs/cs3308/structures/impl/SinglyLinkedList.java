@@ -1,4 +1,4 @@
-package edu.isu.cs.cs3308;
+package edu.isu.cs.cs3308.structures.impl;
 
 import edu.isu.cs.cs3308.structures.List;
 
@@ -10,6 +10,12 @@ import edu.isu.cs.cs3308.structures.List;
  * Description: This class impliments a singly linked list to use with the rest of this example
  */
 
+
+/**
+ * Printlist directive claims put a space in, only works with new line
+ * Fix remove method (passes test, may not be correct)
+ */
+
 // Interfacing source: https://www.geeksforgeeks.org/interfaces-in-java/
 
 public class SinglyLinkedList<E> implements List<E> {
@@ -17,16 +23,16 @@ public class SinglyLinkedList<E> implements List<E> {
     // Code example from our textbook, pages 126-7
     // Create a Node class with getters and setters
     private static class Node<E> {
-        private E data;
+        private E contents;
         private Node<E> next;
 
         public Node(E data, Node<E> n) {
-            data = data;
+            contents = data;
             next = n;
         }
 
         public E getElement() {
-            return data;
+            return contents;
         }
 
         // Getters and setters
@@ -39,11 +45,11 @@ public class SinglyLinkedList<E> implements List<E> {
         }
 
         public E getData() {
-            return data;
+            return contents;
         }
 
         public void setData() {
-            this.data = data;
+            this.contents = contents;
         }
     }
 
@@ -124,23 +130,26 @@ public class SinglyLinkedList<E> implements List<E> {
             tail = tail.getNext();
         }
         tail.setNext(null);
+        size--;
         return toRemove;
     }
 
-        // Insert node at index -1 so that it becomes the index
+    // Insert node at index -1 so that it becomes the index
     public void insert(E element, int index) {
-        if (element != null && index > 0){
+        if (element != null && index > 0) {
             // If the index is greater than the array, add node to the end
-            if (index >= size){
+            if (index >= size) {
                 addLast(element);
+            } else {
+                Node<E> toInsert = new Node<>(element, null);
+                Node<E> temp = head;
+                for (int i = 0; i < index - 1; i++) {
+                    temp = temp.getNext();
+                }
+                toInsert.setNext(temp.getNext());
+                temp.setNext(toInsert);
+                size++;
             }
-            Node<E> toInsert = new Node<>(element, null);
-            Node<E> temp = head;
-            for(int i = 0; i < index - 1; i++){
-                temp = temp.getNext();
-            }
-            toInsert.setNext(temp.getNext());
-            temp.setNext(toInsert);
         }
     }
 
@@ -154,22 +163,36 @@ public class SinglyLinkedList<E> implements List<E> {
         for (int i = 0; i < index; i++) {
             current = current.getNext();
         }
-            Node<E> toRemove = current.getNext();
-            current.setNext(toRemove.getNext());
-            toRemove.setNext(null);
-            return toRemove.getData();
+        Node<E> toRemove = current;
+
+        //Node<E> toRemove = current.getNext();
+        current.setNext(toRemove.getNext());
+        toRemove.setNext(null);
+        size--;
+        return toRemove.getData();
     }
 
     public E get(int index) {
-        /**
-         * DO STUFF HERE
-         */
+        if (index < 0 || index >= size) {
+            return null;
+        }
+
+        Node<E> toReturn = head;
+        for (int i = 0; i < index; i++) {
+            toReturn = toReturn.getNext();
+        }
+        return toReturn.getData();
     }
 
 
     public void printList() {
-        /**
-         * DO STUFF HERE
-         */
+        String stringToOutput = "";
+        Node<E> tempNode = head;
+        for (int i = 0; i < size; i++) {
+            stringToOutput += tempNode.getData().toString();
+            stringToOutput += "\n";
+            tempNode = tempNode.getNext();
+        }
+        System.out.println(stringToOutput);
     }
 }
