@@ -7,6 +7,7 @@ import edu.isu.cs.cs3308.structures.List;
  * DueDate: 18 January 2019
  * ISUCourse: CS3308
  * Instructor: Isaac Griffith
+ * Project: mission01
  * Description: This class impliments a singly linked list to use with the rest of this example
  */
 
