@@ -10,12 +10,6 @@ import edu.isu.cs.cs3308.structures.List;
  * Description: This class impliments a singly linked list to use with the rest of this example
  */
 
-
-/**
- * Printlist directive claims put a space in, only works with new line
- * Fix remove method (passes test, may not be correct)
- */
-
 // Interfacing source: https://www.geeksforgeeks.org/interfaces-in-java/
 
 public class SinglyLinkedList<E> implements List<E> {
@@ -31,11 +25,11 @@ public class SinglyLinkedList<E> implements List<E> {
             next = n;
         }
 
+        // Getters and setters
         public E getElement() {
             return contents;
         }
 
-        // Getters and setters
         public Node<E> getNext() {
             return next;
         }
@@ -53,7 +47,7 @@ public class SinglyLinkedList<E> implements List<E> {
         }
     }
 
-    // Code example from the our textbook, page 126-7
+    // Code example from our textbook, page 126-7
     // Instance variables of the Singly Linked List
     private Node<E> head = null;
     private Node<E> tail = null;
@@ -160,12 +154,10 @@ public class SinglyLinkedList<E> implements List<E> {
         }
 
         Node<E> current = head;
-        for (int i = 0; i < index; i++) {
+        for (int i = 0; i < index - 1; i++) {
             current = current.getNext();
         }
-        Node<E> toRemove = current;
-
-        //Node<E> toRemove = current.getNext();
+        Node<E> toRemove = current.getNext();
         current.setNext(toRemove.getNext());
         toRemove.setNext(null);
         size--;
@@ -183,7 +175,6 @@ public class SinglyLinkedList<E> implements List<E> {
         }
         return toReturn.getData();
     }
-
 
     public void printList() {
         String stringToOutput = "";

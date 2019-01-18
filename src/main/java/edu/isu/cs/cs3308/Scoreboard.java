@@ -33,7 +33,6 @@ public class Scoreboard {
     public void add(GameEntry entry) {
         board.addFirst(entry);
         if(board.size() > capacity){ board.removeLast(); }
-        //throw new UnsupportedOperationException("Not supported yet.");
     }
 
     /**
@@ -49,7 +48,6 @@ public class Scoreboard {
             throw new IndexOutOfBoundsException("index out of bounds");
         }
         return board.remove(i);
-        //throw new UnsupportedOperationException("Not supported yet.");
     }
 
     /**
