@@ -11,6 +11,7 @@ import edu.isu.cs.cs3308.structures.List;
  * Description: This class impliments a singly linked list to use with the rest of this example
  */
 
+
 // Interfacing source: https://www.geeksforgeeks.org/interfaces-in-java/
 
 public class SinglyLinkedList<E> implements List<E> {
